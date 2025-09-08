@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+  db:
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=whoandwhat
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+
+  api:
+    build:
+      context: .
+      dockerfile: src/WhoAndWhat.Api/Dockerfile
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+    environment:
+      - ConnectionStrings__DefaultConnection=Server=db;Port=5432;Database=whoandwhat;User Id=postgres;Password=postgres;
+    depends_on:
+      - db

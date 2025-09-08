@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using WhoAndWhat.Api.Controllers;
 using WhoAndWhat.Application;
 using WhoAndWhat.Application.Features.Users.Commands;
 using WhoAndWhat.Application.Features.Users.Queries;
@@ -89,6 +90,9 @@ try
     })
     .WithName("LoginUser")
     .WithTags("Authentication");
+
+    app.MapTasksEndpoints();
+    app.MapContactsEndpoints();
 
     app.Run();
 }
