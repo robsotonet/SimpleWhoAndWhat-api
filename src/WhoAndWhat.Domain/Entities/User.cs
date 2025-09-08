@@ -10,4 +10,6 @@ public class User
     public SubscriptionTier SubscriptionTier { get; set; } = SubscriptionTier.Free;
     public string? RefreshToken { get; set; }
     public DateTime? RefreshTokenExpiryTime { get; set; }
+
+    public ICollection<AppTask> Tasks { get; set; } = new List<AppTask>();
 }

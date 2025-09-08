@@ -22,7 +22,8 @@ try
 
     builder.Host.UseSerilog((context, services, loggerConfiguration) => loggerConfiguration
         .ReadFrom.Configuration(context.Configuration)
-        .ReadFrom.Services(services));
+        .ReadFrom.Services(services)
+        .Enrich.FromLogContext());
 
     // Add services to the container.
     builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblyContaining<IApplicationMarker>());
@@ -61,6 +62,8 @@ try
     }
 
     app.UseHttpsRedirection();
+
+    app.UseMiddleware<LogContextMiddleware>();
 
     app.UseAuthentication();
     app.UseAuthorization();

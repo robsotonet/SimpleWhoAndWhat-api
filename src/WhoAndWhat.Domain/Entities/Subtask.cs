@@ -8,5 +8,5 @@ public class Subtask
     public bool IsCompleted { get; set; }
 
     // Navigation properties
-    public Task? Task { get; set; }
+    public AppTask? AppTask { get; set; }
 }

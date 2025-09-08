@@ -2,7 +2,7 @@ using WhoAndWhat.Domain.Enums;
 
 namespace WhoAndWhat.Domain.Entities;
 
-public class Task
+public class AppTask
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public required Guid UserId { get; set; }

@@ -11,7 +11,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Contact> Contacts { get; set; }
-    public DbSet<Domain.Entities.Task> Tasks { get; set; }
+    public DbSet<AppTask> AppTasks { get; set; }
     public DbSet<Subtask> Subtasks { get; set; }
     public DbSet<ShoppingListItem> ShoppingListItems { get; set; }
     public DbSet<Message> Messages { get; set; }
@@ -21,22 +21,22 @@ public class ApplicationDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
-        // User has many Tasks
+        // User has many AppTasks
         modelBuilder.Entity<User>()
             .HasMany(u => u.Tasks)
             .WithOne(t => t.User)
             .HasForeignKey(t => t.UserId);
 
-        // Task has many Subtasks
-        modelBuilder.Entity<Domain.Entities.Task>()
+        // AppTask has many Subtasks
+        modelBuilder.Entity<AppTask>()
             .HasMany(t => t.Subtasks)
-            .WithOne(s => s.Task)
+            .WithOne(s => s.AppTask)
             .HasForeignKey(s => s.TaskId);
 
-        // Task has many ShoppingListItems
-        modelBuilder.Entity<Domain.Entities.Task>()
+        // AppTask has many ShoppingListItems
+        modelBuilder.Entity<AppTask>()
             .HasMany(t => t.ShoppingListItems)
-            .WithOne(sli => sli.Task)
+            .WithOne(sli => sli.AppTask)
             .HasForeignKey(sli => sli.TaskId);
 
         // Configure Message relationships
